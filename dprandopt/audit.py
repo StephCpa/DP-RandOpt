@@ -81,7 +81,7 @@ def exact_privacy_curve(scores_d: np.ndarray, scores_d2: np.ndarray, k: int, eps
     for s in range(samples):
         noisy = lg1 + rng.gumbel(size=lg1.shape)
         o = np.argsort(-noisy)[:k]
-        losses[s] = mech.plackett_luce_logprob(lg1, o) - mech.plackett_luce_logprob(lg2, o)
+        losses[s] = mech.plackett_luce_logprob_fast(lg1, o) - mech.plackett_luce_logprob_fast(lg2, o)
     eps_grid = np.asarray(eps_grid, dtype=float)
     deltas = np.array([np.mean(np.clip(1 - np.exp(e - losses), 0, None)) for e in eps_grid])
     return eps_grid, deltas, losses

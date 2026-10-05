@@ -1,0 +1,4 @@
+countdown_specialist n=200 done (12s)
+countdown_specialist n=500 done (35s)
+countdown_specialist n=1000 done (69s)
+countdown_specialist n=2000 done (130s)

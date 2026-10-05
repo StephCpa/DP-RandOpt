@@ -57,6 +57,10 @@ SCENARIOS = {
     # paper's Qwen2.5-1.5B Countdown row: base 6.7%, K=1 ~43-47%, K=50 ~52.7%.
     "countdown_like": ThicketParams(mu_b=-1.5, g0=0.28, gc=0.3, gi=0.6, h=0.12, p_invalid=0.35,
                                     q_dominant=0.6, format_credit=True),
+    # Same Countdown targets, but gains come from specialists (cluster-level directions), so a
+    # single pick is weaker and the vote adds more (N=5000, n=200: K=1 ~41%, K=10 ~60%, K=50 ~57%).
+    "countdown_specialist": ThicketParams(mu_b=-1.5, g0=0.06, gc=0.6, gi=0.7, h=0.12, p_invalid=0.35,
+                                          q_dominant=0.5, format_credit=True),
     # Calibrated to the Qwen2.5-3B GSM8K row: base 79.8%, K=50 87.1%.
     "gsm8k_like": ThicketParams(mu_b=0.84, g0=0.12, gc=0.15, gi=0.45, h=0.05, p_invalid=0.15,
                                 q_dominant=0.8),
@@ -108,13 +112,18 @@ def _answers(correct: np.ndarray, dominant: np.ndarray, p: ThicketParams, rng) -
 
 def simulate_table(params: ThicketParams, n_candidates: int = 1000, pool: int = 2000, public: int = 200,
                    test: int = 1000, seed: int = 0, include_base: bool = True,
-                   chunk: int = 250) -> SimulatedTable:
-    """Draw one candidate population and its full score table."""
+                   chunk: int = 250, item_seed: Optional[int] = None) -> SimulatedTable:
+    """Draw one candidate population and its full score table.
+
+    ``item_seed`` fixes the task items separately, so several candidate
+    populations (seeds) can be scored on the same items.
+    """
     rng = np.random.default_rng(seed)
     p = params
     J = pool + public + test
-    b = rng.normal(p.mu_b, p.s_b, size=J)
-    c = rng.integers(0, p.n_clusters, size=J)
+    item_rng = rng if item_seed is None else np.random.default_rng(item_seed)
+    b = item_rng.normal(p.mu_b, p.s_b, size=J)
+    c = item_rng.integers(0, p.n_clusters, size=J)
     dominant = np.ones(test, dtype=np.int16)
 
     N = n_candidates

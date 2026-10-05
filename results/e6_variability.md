@@ -1,0 +1,16 @@
+# E6: variability across candidate pools
+
+Six independently drawn candidate populations (N = 1000, same task items), 20 private subsamples x selection draws each. 'within' = SD over the 20 draws for one pool; 'between' = SD of the six pool means.
+
+| scenario | design | eps | K | n | mean acc | within-pool SD | between-pool SD |
+|---|---|---|---|---|---|---|---|
+| countdown_like | nonprivate | inf | 10 | 1000 | gain 46.6 | 0.0 | 4.8 |
+| countdown_like | D1 | 4 | 10 | 1000 | gain 46.7 | 0.6 | 5.0 |
+| countdown_like | D1 | 1 | 10 | 1000 | gain 46.4 | 0.8 | 5.3 |
+| countdown_like | D1 | 4 | 1 | 1000 | gain 39.1 | 0.0 | 7.3 |
+| gsm8k_like | nonprivate | inf | 10 | 1000 | gain 10.2 | 0.0 | 1.8 |
+| gsm8k_like | D1 | 4 | 10 | 1000 | gain 9.7 | 0.6 | 1.5 |
+| gsm8k_like | D1 | 1 | 10 | 1000 | gain 7.0 | 1.1 | 1.0 |
+| gsm8k_like | D1 | 4 | 1 | 1000 | gain 8.0 | 0.0 | 1.9 |
+
+All pools share the same task items; only the perturbation seeds differ, as in the GPU study. One score table is one draw of the candidate pool, so inference that treats the pool as fixed is conditional on it.

@@ -10,7 +10,7 @@ def sim():
     return simulate_table(SCENARIOS["countdown_like"], n_candidates=300, pool=400, public=50, test=200, seed=0)
 
 
-@pytest.mark.parametrize("design", ["base", "random", "public", "nonprivate", "D0", "D1", "D2", "D3", "D7"])
+@pytest.mark.parametrize("design", ["base", "random", "public", "nonprivate", "D0", "D1", "D2", "D3", "D7", "D8"])
 def test_designs_run(sim, design):
     rng = np.random.default_rng(0)
     t = sim.table

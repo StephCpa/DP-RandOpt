@@ -105,3 +105,23 @@ def test_noisy_scores_topk_shapes():
     rng = np.random.default_rng(6)
     idx, noisy = mech.noisy_scores_top_k(np.arange(20.0), 5, 1.0, rng)
     assert idx.shape == (5,) and noisy.shape == (20,)
+
+
+def test_fast_plackett_luce_matches_exact():
+    rng = np.random.default_rng(7)
+    for _ in range(50):
+        lg = rng.normal(0, 3, size=30)
+        o = rng.permutation(30)[:10]
+        assert mech.plackett_luce_logprob_fast(lg, o) == pytest.approx(mech.plackett_luce_logprob(lg, o), abs=1e-8)
+
+
+def test_stable_top_k_releases_only_stable_sets():
+    rng = np.random.default_rng(8)
+    stable = np.array([100.0, 99.0, 98.0, 10.0, 9.0])      # gap 88 at K = 3
+    unstable = np.array([100.0, 99.0, 98.0, 97.5, 9.0])    # gap 0.5 at K = 3
+    assert mech.distance_to_instability(stable, 3) == 44
+    assert mech.distance_to_instability(unstable, 3) == 1
+    got = [mech.stable_top_k(stable, 3, 1.0, 1e-5, rng=rng) for _ in range(200)]
+    assert all(g is not None and set(g.tolist()) == {0, 1, 2} for g in got)
+    released = sum(mech.stable_top_k(unstable, 3, 1.0, 1e-5, rng=rng) is not None for _ in range(20000))
+    assert released / 20000 < 1e-3

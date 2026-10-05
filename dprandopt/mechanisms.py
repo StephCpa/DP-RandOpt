@@ -81,6 +81,19 @@ def peeling_em(sum_scores, k: int, eps0: float, sensitivity=1.0, monotone=False,
     return np.array(out, dtype=int)
 
 
+def plackett_luce_logprob_fast(logits: np.ndarray, ordered: np.ndarray) -> float:
+    """Vectorised Plackett-Luce log-probability (O(N + K)); falls back to the exact
+    loop when the picked items carry almost all of the mass (cancellation)."""
+    lg = np.asarray(logits, dtype=float)
+    m = lg.max()
+    w = np.exp(lg - m)
+    picked = w[ordered]
+    remaining = w.sum() - np.concatenate([[0.0], np.cumsum(picked)[:-1]])
+    if remaining.min() < 1e-9 * w.sum():
+        return plackett_luce_logprob(lg, ordered)
+    return float(np.sum(lg[ordered] - m - np.log(remaining)))
+
+
 def plackett_luce_logprob(logits: np.ndarray, ordered: np.ndarray) -> float:
     """Exact log-probability that Gumbel top-K returns the ordered tuple ``ordered``."""
     lg = np.asarray(logits, dtype=float)
@@ -184,3 +197,34 @@ def sharded_picks(per_example_rewards: np.ndarray, k: int, eps: float, sensitivi
         out.append(j)
         alive[j] = False
     return np.array(out, dtype=int)
+
+
+# ---------------------------------------------------------------------------
+# D8: stability-based release of the exact top-K set (propose-test-release)
+# ---------------------------------------------------------------------------
+
+def distance_to_instability(sum_scores, k: int, sensitivity=1.0) -> int:
+    """Records that must be replaced before the top-K *set* can change.
+
+    One replaced record moves any score difference by at most 2R, so the set
+    is fixed while fewer than ceil(g / 2R) records change, where g is the gap
+    between the K-th and (K+1)-th scores.
+    """
+    u = np.sort(np.asarray(sum_scores, dtype=float))[::-1]
+    if k >= u.size:
+        return np.iinfo(np.int64).max
+    gap = u[k - 1] - u[k]
+    return int(math.ceil(gap / (2.0 * sensitivity))) if gap > 0 else 0
+
+
+def stable_top_k(sum_scores, k: int, eps: float, delta: float, sensitivity=1.0, rng=None) -> Optional[np.ndarray]:
+    """(eps, delta)-DP propose-test-release of the exact top-K set (Dwork & Lei 2009;
+    Thakurta & Smith 2013). Returns the set in random order, or None (bottom)."""
+    r = _rng(rng)
+    d = distance_to_instability(sum_scores, k, sensitivity)
+    if d + r.laplace(scale=1.0 / eps) <= math.log(1.0 / delta) / eps:
+        return None
+    u = np.asarray(sum_scores, dtype=float)
+    top = np.argsort(-u, kind="stable")[:k]
+    r.shuffle(top)
+    return top

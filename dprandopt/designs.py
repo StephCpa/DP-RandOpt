@@ -13,6 +13,8 @@ Designs (privacy is spent only where marked):
 * ``D2``          one pure pick per disjoint shard of the private set.  [parallel]
 * ``D3``          one private pick + K-1 data-free neighbours of it.  [one pick]
 * ``D7``          one EM over K-subsets with utility = subset minimum.  [one pick]
+* ``D8``          propose-test-release of the exact top-K set when the gap at the
+                  boundary is large; falls back to the base model otherwise.  [(eps, delta)]
 
 Every private design may be restricted to a public pre-screen (top-M by the
 public proxy score); the pre-screen uses no private data.
@@ -34,7 +36,7 @@ NeighborFn = Callable[[int, int, np.random.Generator], np.ndarray]
 """neighbor_fn(expert_index, count, rng) -> test answers [count, T] of data-free
 perturbations around the expert (used by D3 only)."""
 
-PRIVATE_DESIGNS = ("D0", "D1", "D2", "D3", "D7")
+PRIVATE_DESIGNS = ("D0", "D1", "D2", "D3", "D7", "D8")
 
 
 @dataclass
@@ -117,6 +119,13 @@ def select(table: ScoreTable, design: str, *, k: int, pool_cols: np.ndarray,
     if design == "D7":
         idx = cand[mech.threshold_subset_em(U, k, eps, R, monotone, rng)]
         return Selection(design, idx, table.test_answer[idx], eps0=eps)
+    if design == "D8":
+        local = mech.stable_top_k(U, k, eps, delta, R, rng)
+        if local is None:
+            idx = np.array([table.base_index])
+            return Selection(design, idx, table.test_answer[idx], info={"released": False})
+        idx = cand[local]
+        return Selection(design, idx, table.test_answer[idx], info={"released": True})
     if design == "D3":
         expert = int(cand[mech.exponential_mechanism(U, eps, R, monotone, rng)])
         answers = table.test_answer[[expert]]
