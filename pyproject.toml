@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dprandopt"
+version = "0.1.0"
+description = "DP-RandOpt: differentially private post-training by selection among data-independent weight perturbations"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24", "scipy>=1.10"]
+
+[project.optional-dependencies]
+dev = ["pytest", "matplotlib", "pandas"]
+
+[tool.setuptools]
+packages = ["dprandopt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
