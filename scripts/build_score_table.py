@@ -79,15 +79,18 @@ def load_items(args, handler):
 
 
 def gold_string(args, item):
-    return str(item["target"]) if args.dataset == "countdown" else str(item["ground_truth"]).replace(",", "")
+    if args.dataset == "countdown":
+        return str(item["target"])
+    from dprandopt.gsm8k import canonical_number
+    return canonical_number(item['ground_truth'])
 
 
 def vote_string(args, handler, text, item):
     if args.dataset == "countdown":
         ans, ok, _ = handler.extract_answer_for_voting(text, numbers=item["numbers"])
         return ans if ok else ""
-    a = handler.extract_answer(text) or ""
-    return a.replace(",", "").rstrip(".")
+    from dprandopt.gsm8k import canonical_number
+    return canonical_number(handler.extract_answer(text) or '')
 
 
 def main():
@@ -161,7 +164,11 @@ def main():
                     output_lengths[i, j] = n_tokens
                     tokens += n_tokens
                     if j < P + Q:
-                        rewards[i, j] = float(handler.compute_reward(text, items[j]["ground_truth"]))
+                        if args.dataset == 'gsm8k':
+                            from dprandopt.gsm8k import answer_and_reward
+                            _, rewards[i, j] = answer_and_reward(handler,text,items[j]['ground_truth'])
+                        else:
+                            rewards[i, j] = float(handler.compute_reward(text, items[j]["ground_truth"]))
                     else:
                         answers[i][j - P - Q] = vote_string(args, handler, text, items[j])
                 done[i] = True
@@ -183,7 +190,9 @@ def main():
     with open(args.out + ".meta.json", "w") as f:
         json.dump({"model": args.model, "dataset": args.dataset, "N": N, "pool": P, "public": Q, "test": T,
                    "sigmas": sig_grid, "seed": args.seed, "candidate_seed": args.seed,
-                   "item_seed": args.item_seed, "hours": (time.time() - t0) / 3600,
+                    "item_seed": args.item_seed,
+                    "scoring": 'canonical_voting_answer_v1' if args.dataset=='gsm8k' else 'randopt_countdown',
+                    "hours": (time.time() - t0) / 3600,
                    "generated_tokens_per_s": tokens / (time.time() - t0)}, f, indent=2)
     print("wrote", args.out)
 

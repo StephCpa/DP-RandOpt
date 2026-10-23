@@ -3,6 +3,12 @@
 Date: 2026-10-23 (Asia/Shanghai). This update supersedes the 10% truncation
 gate and batch-size-one reproducibility proposal in earlier reports.
 
+The controls described as running below have since completed. See the
+[completed comparison](../batched_controls_20261023/REPORT.md): repeat flips
+were zero, self-consistency vote is 45.80%, and D1's vote advantage over it
+is not resolved by the conditional paired interval. The launch section below
+is preserved as the original protocol record.
+
 ## Decision
 
 Fix future Countdown runs at 1024 output tokens, the setting in the deployed

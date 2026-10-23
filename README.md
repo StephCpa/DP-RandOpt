@@ -9,7 +9,8 @@ and [project status](results/gpu-smoke/PROJECT_STATUS.md). Full 512-token and
 32-candidate 1024/2048-token tables have run on GPUs. Current evaluation fixes
 1024 tokens, compares selection against data-free random-5 voting and checked
 pass@5, and separates member quality from ensemble composition. Production
-batched repeatability and base sampling controls are in progress. These
+batched repeatability and base sampling controls are complete; see the
+[paired comparison](results/gpu-smoke/batched_controls_20261023/REPORT.md). These
 Countdown results are task-specific and do not yet validate the claim on GSM8K.
 
 The small frozen score-table artifacts included here use **generated synthetic

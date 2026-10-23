@@ -1,0 +1,9 @@
+{
+  "torch": "2.6.0+cu124",
+  "vllm": "0.8.5",
+  "transformers": "4.52.3",
+  "start_unix": 1792714597.933902,
+  "CUDA_VISIBLE_DEVICES": "0",
+  "prompt_hash": "9d45b60276ce3a7904c60d9bfc4f86b3df7f89f06dc438cc2ab3e7e89923cc72",
+  "protocol_hash": "3b50a7dcffdf9a3800cc8420c9b205782e522f9fd5ba2957ddbff2ea40ea9a48"
+}

@@ -12,12 +12,17 @@ score tables, not a release of confidential private examples. The word
   of the same saved 2048-token trajectories; see diagnostics for tokenization error.
 - `selection_decomposition/audit.json`: members, votes, checked pass@5 and overlap.
 - `selection_decomposition/REPORT.md`: current interpretation and pending controls.
+- `batched_controls_20261023/analysis.json` and `comparison_vectors.npz`:
+  completed sampling/repeatability controls and compact paired-comparison inputs.
+- `gsm8k_ready/protocol.json` and `preflight.json`: prepared official-data
+  assignments and CPU checks; no GSM8K model results.
 
 Set PYTHONPATH to the repository root and run:
 
 ```text
 python scripts/audit_vote_selection.py
 python scripts/analyze_prefix_scores.py
+python scripts/analyze_batched_controls.py --comparisons-only
 python -m unittest discover -s tests -p test_vote_decomposition.py
 python -m unittest discover -s tests -p test_pilot.py
 ```

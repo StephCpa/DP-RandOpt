@@ -26,7 +26,7 @@ def exact_random_pass(correct, k):
                      for s in correct.sum(axis=0)])
 
 
-def analyze(t, reps, random_reps):
+def analyze(t, reps, random_reps, return_vectors=False):
     rng = np.random.default_rng(20261023)
     candidates = np.delete(np.arange(t.n_candidates), t.base_index)
     cols = np.arange(t.pool_size)
@@ -64,7 +64,7 @@ def analyze(t, reps, random_reps):
     out['public_private_overlap'] = dict(indices=sorted(set(sets['public']) & set(sets['nonprivate'])),
                                          count=len(set(sets['public']) & set(sets['nonprivate'])))
     out['nonprivate_minus_public'] = {key:paired(vectors['nonprivate'][key], vectors['public'][key]) for key in rv}
-    return out
+    return (out, {'random5':rv, **vectors}) if return_vectors else out
 
 
 def main():

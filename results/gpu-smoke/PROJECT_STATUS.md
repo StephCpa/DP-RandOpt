@@ -4,6 +4,18 @@ Date: 2026-10-23
 
 ## Current status
 
+Latest control update 2026-10-23: production-batched repeatability and base
+self-consistency completed at 09:02. All 6200 repeated response pairs and
+the corresponding archived 1024 pilot texts match exactly. Self-consistency
+vote is 45.80% versus random perturbations 41.19% (paired difference +4.61
+points, conditional 95% interval [0.79,8.49]). D1 is 48.34%; its +2.54-point
+advantage over self-consistency has interval [-2.68,7.75]. See
+`batched_controls_20261023/REPORT.md`. Earlier "running" entries below are
+historical. GSM8K data and scoring preparation is complete: 1000 pool items,
+50 public items and all 1319 test items, with CPU integration checks passed.
+The full-test baseline runner and guarded launcher are ready; GPU execution
+has not been tested or started. See `gsm8k_ready/PLAN.md`.
+
 Latest update 2026-10-23: fixed future Countdown cap at 1024 and removed the
 10% truncation gate. CPU scoring of saved-trajectory prefixes found only one
 extra correct perturbed test response beyond 1024 (out of 15,500). Random-5

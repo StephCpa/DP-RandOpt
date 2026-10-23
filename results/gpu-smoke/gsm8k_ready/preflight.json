@@ -1,0 +1,11 @@
+{
+  "pool": 1000,
+  "public": 50,
+  "test": 1319,
+  "split_alignment_passed": true,
+  "scoring_alignment_passed": true,
+  "max_prompt_tokens": 244,
+  "max_tokens": 1024,
+  "context_2048_sufficient": true,
+  "gpu_generation_started": false
+}
