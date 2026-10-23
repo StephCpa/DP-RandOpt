@@ -4,6 +4,15 @@ Date: 2026-10-23
 
 ## Current status
 
+Latest GSM8K update 2026-10-23 16:08 Asia/Shanghai: full-test baselines
+completed, greedy 85.75%, self-consistency vote 89.31%, oracle pass@5 94.84%.
+All five downloaded source-file SHA-256 hashes match the server.
+The first N=1001 candidate pool is running on lzn GPU 0, candidate seed
+20261024, item seed 20261023, cap 1024, n=1000, Q=50, test=1319.
+Wrapper PID 1947182; log `logs/gsm8k_pool_seed20261024_20261023_160845.log`.
+Other candidate seeds have not started. Earlier preparation-only entries
+below are historical. See `gsm8k_baselines_20261023/REPORT.md`.
+
 Latest control update 2026-10-23: production-batched repeatability and base
 self-consistency completed at 09:02. All 6200 repeated response pairs and
 the corresponding archived 1024 pilot texts match exactly. Self-consistency

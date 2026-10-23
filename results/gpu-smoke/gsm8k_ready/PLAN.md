@@ -1,7 +1,8 @@
 # GSM8K execution plan
 
 Date: 2026-10-23. Mode: internal experiment design and execution preparation.
-No GSM8K model outputs or accuracy results have been generated.
+The full-test baselines completed on 2026-10-23 at 14:38 Asia/Shanghai.
+The first frozen candidate pool started at 16:08 on lzn GPU 0.
 
 ## Question
 
@@ -85,13 +86,13 @@ tokens, context 2048, eager execution, CPU base-weight copy, and checkpoint
 interval 10 candidates. Restrict engines to explicitly available GPUs. Do
 not reduce the candidate pool or test set and present that as the main result.
 
-No new GPU experiment is running. At preparation time GPU 0 had an active
-unrelated workload and about 32 GiB free; GPU 1 was busy. The baseline runner
-uses GSM8K prompts and extraction, not the Countdown-specific controls script.
-`scripts/run_gsm8k_baselines.py` and its guarded lzn launcher are prepared.
-Only CPU preflight has run; the new GPU generation path remains untested
-until the full-test baseline executes. The generic score-table builder is
-prepared for the new data and scoring path.
+The full-test baseline completed successfully: greedy accuracy 85.75%,
+five-sample plurality accuracy 89.31%, and oracle pass@5 94.84%.
+The first full candidate pool (seed 20261024) was launched on lzn GPU 0
+at 16:08 on 2026-10-23 using `scripts/launch_gsm8k_pool_lzn.sh`.
+The launcher checks resource availability and holds the existing experiment
+lock; up to three retries resume checkpoints from this fixed configuration.
+The remaining two candidate seeds are not launched.
 
 ## Evidence and interpretation
 
@@ -102,6 +103,6 @@ candidate seeds and sampling realizations address different variability.
 If the first full-pool result does not support the comparison, preserve it
 and reassess the claim rather than tune on the official test set.
 
-All GSM8K result entries remain unmeasured. No new method, verifier or model
+GSM8K perturbation and private-selection results remain unmeasured. No new method, verifier or model
 architecture is substituted. The earlier Countdown subset remains diagnostic
 evidence, not a replacement for this full-task comparison.
