@@ -1,0 +1,21 @@
+--- a/RandOpt/utils/worker_extn.py
++++ b/RandOpt/utils/worker_extn.py
+@@
+     def store_base_weights(self):
+         """Store a copy of current weights as base weights for ensemble."""
+         self._base_weights = {}
++        use_cpu = os.environ.get("RANDOPT_BASE_WEIGHTS_DEVICE", "cuda").lower() == "cpu"
+         for name, p in self.model_runner.model.named_parameters():
+-            self._base_weights[name] = p.data.clone()
++            base = p.detach().to("cpu" if use_cpu else p.device).clone()
++            if use_cpu:
++                base = base.pin_memory()
++            self._base_weights[name] = base
+@@
+-            p.data.copy_(self._base_weights[name])
++            base = self._base_weights[name]
++            p.data.copy_(base, non_blocking=(base.device.type == "cpu"))
+@@
+-            p.data.copy_(self._base_weights[name])
++            base = self._base_weights[name]
++            p.data.copy_(base, non_blocking=(base.device.type == "cpu"))

@@ -1,0 +1,24 @@
+{
+  "completed": 1,
+  "planned": 32,
+  "max_tokens": 1024,
+  "complete": false,
+  "candidates": [
+    {
+      "index": 0,
+      "old_accuracy": 0.168,
+      "new_accuracy": 0.19,
+      "paired_difference": 0.021999999999999992,
+      "old_cap_hit": 0.42129032258064514,
+      "new_cap_hit": 0.28774193548387095,
+      "length_finish": 0.28774193548387095
+    }
+  ],
+  "overall_cap_hit": 0.28774193548387095,
+  "overall_length_finish": 0.28774193548387095,
+  "scope": "Paired length diagnostic only; not a full-candidate-pool D1 comparison",
+  "base_paired_ci95": [
+    -0.014,
+    0.058
+  ]
+}

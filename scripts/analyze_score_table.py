@@ -3,7 +3,7 @@
 
     python scripts/analyze_score_table.py tables/qwen1.5b_countdown.npz --out results/qwen1.5b_countdown
 
-Writes <out>_phase0.json (density, plain-RandOpt K-curve, gate G1) and
+Writes <out>_phase0.json (density, plain-RandOpt K-curve, legacy G1-at-K50 gate) and
 <out>_phase1.csv (every design x eps x K x n cell, mean and SE over repeats,
 plus per-item vote correctness for the paired tests in <out>_items.npz).
 
@@ -67,7 +67,8 @@ def main():
     n1000 = min(1000, t.pool_size)
     cols = t.subsample_pool(n1000, rng)
     k50 = designs.select(t, "nonprivate", k=min(50, t.n_candidates), pool_cols=cols, rng=rng).vote_acc
-    phase0["gate_G1"] = dict(k50_at_n1000=k50, gain_points=100 * (k50 - base), passed=bool(k50 - base >= 0.05))
+    phase0["gate_G1_at_k50"] = dict(k50_at_n1000=k50, gain_points=100 * (k50 - base),
+                                     passed=bool(k50 - base >= 0.05))
     with open(a.out + "_phase0.json", "w") as f:
         json.dump(phase0, f, indent=2, default=float)
     print(json.dumps(phase0, indent=2, default=float))

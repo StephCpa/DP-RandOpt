@@ -1,0 +1,16 @@
+{
+  "manifest_sha256": "5ae3573e1a4ba9405e7698dcab9d4ce88c23d8f3ae6baafe67db4beda7580c8d",
+  "prompts_sha256": "9d45b60276ce3a7904c60d9bfc4f86b3df7f89f06dc438cc2ab3e7e89923cc72",
+  "torch": "2.6.0+cu124",
+  "vllm": "0.8.5",
+  "transformers": "4.52.3",
+  "gpu_memory_utilization": 0.65,
+  "base_weights_device": "cpu",
+  "CUDA_VISIBLE_DEVICES": "0",
+  "model_path": "/home/lkx/OPCD/models/Qwen2.5-3B-Instruct",
+  "max_model_len": 4096,
+  "max_prompt_tokens": 131,
+  "max_num_seqs": 128,
+  "max_num_batched_tokens": 2048,
+  "started_unix": 1792654429.7254384
+}

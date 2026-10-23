@@ -4,6 +4,19 @@ Differentially private post-training by **selection**. RandOpt ("Neural Thickets
 
 **Start here: [`docs/REPORT.md`](docs/REPORT.md).** It covers what the October 4 research plan survives, what to change before spending GPU time, and the evidence for each point. Proofs are in [`docs/theory.md`](docs/theory.md).
 
+**Real-model update (2026-10-23):** see the [current Countdown analysis](results/gpu-smoke/selection_decomposition/REPORT.md)
+and [project status](results/gpu-smoke/PROJECT_STATUS.md). Full 512-token and
+32-candidate 1024/2048-token tables have run on GPUs. Current evaluation fixes
+1024 tokens, compares selection against data-free random-5 voting and checked
+pass@5, and separates member quality from ensemble composition. Production
+batched repeatability and base sampling controls are in progress. These
+Countdown results are task-specific and do not yet validate the claim on GSM8K.
+
+The small frozen score-table artifacts included here use **generated synthetic
+Countdown items**, not confidential examples. Large response-text archives
+remain in the experiment workspace. CPU table-only reproduction is documented
+in [the artifact guide](results/gpu-smoke/ARTIFACTS.md).
+
 ## Status (2026-10-05)
 
 | Part | State |
@@ -12,7 +25,7 @@ Differentially private post-training by **selection**. RandOpt ("Neural Thickets
 | Accounting cross-check | Agrees with AutoDP's exponential-mechanism composition within 0.1% (`results/e7_accounting_crosscheck.md`) |
 | Theory (privacy, peeling-corrected utility, N-free population bound, packing lower bound) | `docs/theory.md` |
 | Simulation study (7 experiments on calibrated synthetic score tables) | `results/`, `docs/figures/` |
-| GPU score-table builder for RandOpt + vLLM | `scripts/build_score_table.py`. **Written, not yet run on a GPU** |
+| GPU score-table builder for RandOpt + vLLM | Initially untested; now executed on local/server Countdown runs (see the 2026-10-23 update above) |
 | Phase 0/1 analysis of a real score table | `scripts/analyze_score_table.py` (CPU, minutes) |
 
 ## Layout

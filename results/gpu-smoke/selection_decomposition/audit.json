@@ -1,0 +1,546 @@
+{
+  "scope": "Synthetic Countdown. Checked pass uses prompt-visible target and formula validation, no private labels. Intervals conditional on fixed candidate pool; not fresh-pool uncertainty.",
+  "results": {
+    "subset_512": {
+      "N": 32,
+      "base": 0.168,
+      "K": 5,
+      "n": 1000,
+      "Q": 50,
+      "epsilon": 8,
+      "delta": 1e-05,
+      "random_scope": "Five distinct perturbations, excluding base; uniformly ordered.",
+      "random_draws": 2000,
+      "selection_draws": 400,
+      "random5": {
+        "member": 0.1555483870967742,
+        "vote": 0.40838,
+        "checked_pass": 0.4596079830028662,
+        "vote_mc_standard_error": 0.0007073372342677081,
+        "checked_pass_computation": "Exact finite-population expectation per test item"
+      },
+      "public": {
+        "member": 0.19760000000000003,
+        "vote": 0.466,
+        "checked_pass": 0.562,
+        "vote_minus_random5": {
+          "difference": 0.05762,
+          "conditional_item_ci95": [
+            0.023783999999999996,
+            0.09203902499999993
+          ]
+        },
+        "pass_minus_vote": {
+          "difference": 0.096,
+          "conditional_item_ci95": [
+            0.072,
+            0.124
+          ]
+        },
+        "members_in_vote_order": [
+          20,
+          14,
+          4,
+          27,
+          22
+        ],
+        "individual_member_accuracy": [
+          0.22,
+          0.224,
+          0.2,
+          0.178,
+          0.166
+        ]
+      },
+      "nonprivate": {
+        "member": 0.18680000000000002,
+        "vote": 0.472,
+        "checked_pass": 0.538,
+        "vote_minus_random5": {
+          "difference": 0.06362000000000001,
+          "conditional_item_ci95": [
+            0.030230700000000003,
+            0.09776644999999996
+          ]
+        },
+        "pass_minus_vote": {
+          "difference": 0.066,
+          "conditional_item_ci95": [
+            0.046,
+            0.088
+          ]
+        },
+        "members_in_vote_order": [
+          20,
+          27,
+          14,
+          22,
+          12
+        ],
+        "individual_member_accuracy": [
+          0.22,
+          0.178,
+          0.224,
+          0.166,
+          0.146
+        ]
+      },
+      "D1": {
+        "member": 0.1872320000000007,
+        "vote": 0.47201,
+        "checked_pass": 0.53866,
+        "vote_minus_random5": {
+          "difference": 0.06363,
+          "conditional_item_ci95": [
+            0.031285075,
+            0.09677659999999996
+          ]
+        },
+        "pass_minus_vote": {
+          "difference": 0.06665,
+          "conditional_item_ci95": [
+            0.047844,
+            0.08792549999999999
+          ]
+        }
+      },
+      "public_private_overlap": {
+        "indices": [
+          14,
+          20,
+          22,
+          27
+        ],
+        "count": 4
+      },
+      "nonprivate_minus_public": {
+        "member": {
+          "difference": -0.0108,
+          "conditional_item_ci95": [
+            -0.0196,
+            -0.002
+          ]
+        },
+        "vote": {
+          "difference": 0.006,
+          "conditional_item_ci95": [
+            -0.022,
+            0.034
+          ]
+        },
+        "checked_pass": {
+          "difference": -0.024,
+          "conditional_item_ci95": [
+            -0.05,
+            4.999999999927241e-05
+          ]
+        }
+      }
+    },
+    "full_512": {
+      "N": 1001,
+      "base": 0.168,
+      "K": 5,
+      "n": 1000,
+      "Q": 50,
+      "epsilon": 8,
+      "delta": 1e-05,
+      "random_scope": "Five distinct perturbations, excluding base; uniformly ordered.",
+      "random_draws": 2000,
+      "selection_draws": 400,
+      "random5": {
+        "member": 0.15336399999999997,
+        "vote": 0.390691,
+        "checked_pass": 0.4444469971843698,
+        "vote_mc_standard_error": 0.0007625909991705959,
+        "checked_pass_computation": "Exact finite-population expectation per test item"
+      },
+      "public": {
+        "member": 0.1988,
+        "vote": 0.434,
+        "checked_pass": 0.55,
+        "vote_minus_random5": {
+          "difference": 0.04330900000000001,
+          "conditional_item_ci95": [
+            0.008156749999999999,
+            0.07782079999999998
+          ]
+        },
+        "pass_minus_vote": {
+          "difference": 0.116,
+          "conditional_item_ci95": [
+            0.088,
+            0.146
+          ]
+        },
+        "members_in_vote_order": [
+          490,
+          987,
+          195,
+          825,
+          887
+        ],
+        "individual_member_accuracy": [
+          0.134,
+          0.15,
+          0.31,
+          0.184,
+          0.216
+        ]
+      },
+      "nonprivate": {
+        "member": 0.25439999999999996,
+        "vote": 0.572,
+        "checked_pass": 0.636,
+        "vote_minus_random5": {
+          "difference": 0.18130900000000003,
+          "conditional_item_ci95": [
+            0.14480192500000003,
+            0.21988029999999995
+          ]
+        },
+        "pass_minus_vote": {
+          "difference": 0.064,
+          "conditional_item_ci95": [
+            0.044,
+            0.086
+          ]
+        },
+        "members_in_vote_order": [
+          379,
+          887,
+          195,
+          505,
+          20
+        ],
+        "individual_member_accuracy": [
+          0.282,
+          0.216,
+          0.31,
+          0.244,
+          0.22
+        ]
+      },
+      "D1": {
+        "member": 0.25641500000000067,
+        "vote": 0.57172,
+        "checked_pass": 0.636655,
+        "vote_minus_random5": {
+          "difference": 0.181029,
+          "conditional_item_ci95": [
+            0.14643342500000003,
+            0.21786522499999994
+          ]
+        },
+        "pass_minus_vote": {
+          "difference": 0.064935,
+          "conditional_item_ci95": [
+            0.045744875000000004,
+            0.08499587499999998
+          ]
+        }
+      },
+      "public_private_overlap": {
+        "indices": [
+          195,
+          887
+        ],
+        "count": 2
+      },
+      "nonprivate_minus_public": {
+        "member": {
+          "difference": 0.055600000000000004,
+          "conditional_item_ci95": [
+            0.0408,
+            0.07079999999999999
+          ]
+        },
+        "vote": {
+          "difference": 0.138,
+          "conditional_item_ci95": [
+            0.096,
+            0.182
+          ]
+        },
+        "checked_pass": {
+          "difference": 0.086,
+          "conditional_item_ci95": [
+            0.05,
+            0.122
+          ]
+        }
+      }
+    },
+    "subset_1024": {
+      "N": 32,
+      "base": 0.19,
+      "K": 5,
+      "n": 1000,
+      "Q": 50,
+      "epsilon": 8,
+      "delta": 1e-05,
+      "random_scope": "Five distinct perturbations, excluding base; uniformly ordered.",
+      "random_draws": 2000,
+      "selection_draws": 400,
+      "random5": {
+        "member": 0.15987096774193546,
+        "vote": 0.411893,
+        "checked_pass": 0.4725705104437028,
+        "vote_mc_standard_error": 0.0007201531682863697,
+        "checked_pass_computation": "Exact finite-population expectation per test item"
+      },
+      "public": {
+        "member": 0.20960000000000004,
+        "vote": 0.534,
+        "checked_pass": 0.584,
+        "vote_minus_random5": {
+          "difference": 0.12210700000000001,
+          "conditional_item_ci95": [
+            0.09019002500000001,
+            0.154391625
+          ]
+        },
+        "pass_minus_vote": {
+          "difference": 0.05,
+          "conditional_item_ci95": [
+            0.032,
+            0.07
+          ]
+        },
+        "members_in_vote_order": [
+          14,
+          27,
+          5,
+          20,
+          26
+        ],
+        "individual_member_accuracy": [
+          0.24,
+          0.19,
+          0.17,
+          0.242,
+          0.206
+        ]
+      },
+      "nonprivate": {
+        "member": 0.2024,
+        "vote": 0.482,
+        "checked_pass": 0.58,
+        "vote_minus_random5": {
+          "difference": 0.070107,
+          "conditional_item_ci95": [
+            0.035769525,
+            0.10465319999999996
+          ]
+        },
+        "pass_minus_vote": {
+          "difference": 0.098,
+          "conditional_item_ci95": [
+            0.072,
+            0.124
+          ]
+        },
+        "members_in_vote_order": [
+          20,
+          27,
+          14,
+          22,
+          4
+        ],
+        "individual_member_accuracy": [
+          0.242,
+          0.19,
+          0.24,
+          0.154,
+          0.186
+        ]
+      },
+      "D1": {
+        "member": 0.2001920000000008,
+        "vote": 0.48335999999999996,
+        "checked_pass": 0.5779650000000001,
+        "vote_minus_random5": {
+          "difference": 0.071467,
+          "conditional_item_ci95": [
+            0.038695425,
+            0.10447174999999989
+          ]
+        },
+        "pass_minus_vote": {
+          "difference": 0.09460500000000001,
+          "conditional_item_ci95": [
+            0.07144937500000001,
+            0.11877012500000002
+          ]
+        }
+      },
+      "public_private_overlap": {
+        "indices": [
+          14,
+          20,
+          27
+        ],
+        "count": 3
+      },
+      "nonprivate_minus_public": {
+        "member": {
+          "difference": -0.007200000000000001,
+          "conditional_item_ci95": [
+            -0.019200000000000002,
+            0.005599999999999998
+          ]
+        },
+        "vote": {
+          "difference": -0.052,
+          "conditional_item_ci95": [
+            -0.088,
+            -0.018
+          ]
+        },
+        "checked_pass": {
+          "difference": -0.004,
+          "conditional_item_ci95": [
+            -0.03404999999999998,
+            0.028
+          ]
+        }
+      }
+    },
+    "subset_2048": {
+      "N": 32,
+      "base": 0.17,
+      "K": 5,
+      "n": 1000,
+      "Q": 50,
+      "epsilon": 8,
+      "delta": 1e-05,
+      "random_scope": "Five distinct perturbations, excluding base; uniformly ordered.",
+      "random_draws": 2000,
+      "selection_draws": 400,
+      "random5": {
+        "member": 0.16309677419354837,
+        "vote": 0.41462099999999996,
+        "checked_pass": 0.474056382459052,
+        "vote_mc_standard_error": 0.0006501349992567922,
+        "checked_pass_computation": "Exact finite-population expectation per test item"
+      },
+      "public": {
+        "member": 0.21,
+        "vote": 0.49,
+        "checked_pass": 0.58,
+        "vote_minus_random5": {
+          "difference": 0.07537899999999999,
+          "conditional_item_ci95": [
+            0.04290097500000001,
+            0.10662659999999999
+          ]
+        },
+        "pass_minus_vote": {
+          "difference": 0.09,
+          "conditional_item_ci95": [
+            0.066,
+            0.116
+          ]
+        },
+        "members_in_vote_order": [
+          20,
+          14,
+          31,
+          27,
+          4
+        ],
+        "individual_member_accuracy": [
+          0.256,
+          0.214,
+          0.2,
+          0.182,
+          0.198
+        ]
+      },
+      "nonprivate": {
+        "member": 0.2032,
+        "vote": 0.47,
+        "checked_pass": 0.566,
+        "vote_minus_random5": {
+          "difference": 0.05537899999999999,
+          "conditional_item_ci95": [
+            0.022029200000000002,
+            0.08835127499999999
+          ]
+        },
+        "pass_minus_vote": {
+          "difference": 0.096,
+          "conditional_item_ci95": [
+            0.07,
+            0.122
+          ]
+        },
+        "members_in_vote_order": [
+          20,
+          14,
+          27,
+          4,
+          22
+        ],
+        "individual_member_accuracy": [
+          0.256,
+          0.214,
+          0.182,
+          0.198,
+          0.166
+        ]
+      },
+      "D1": {
+        "member": 0.2032000000000008,
+        "vote": 0.4693,
+        "checked_pass": 0.566,
+        "vote_minus_random5": {
+          "difference": 0.05467899999999999,
+          "conditional_item_ci95": [
+            0.021016800000000002,
+            0.087077675
+          ]
+        },
+        "pass_minus_vote": {
+          "difference": 0.09670000000000001,
+          "conditional_item_ci95": [
+            0.07149825,
+            0.12209149999999998
+          ]
+        }
+      },
+      "public_private_overlap": {
+        "indices": [
+          4,
+          14,
+          20,
+          27
+        ],
+        "count": 4
+      },
+      "nonprivate_minus_public": {
+        "member": {
+          "difference": -0.0068,
+          "conditional_item_ci95": [
+            -0.015999999999999997,
+            0.002
+          ]
+        },
+        "vote": {
+          "difference": -0.02,
+          "conditional_item_ci95": [
+            -0.042,
+            0.002
+          ]
+        },
+        "checked_pass": {
+          "difference": -0.014,
+          "conditional_item_ci95": [
+            -0.036,
+            0.008
+          ]
+        }
+      }
+    }
+  }
+}

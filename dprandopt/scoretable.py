@@ -14,6 +14,7 @@ pool_reward        [N, P] float32  per-example reward in [0, reward_max]
 test_answer        [N, T] int16    answer code per test item (0 gold, -1 none,
                                    >=1 distinct wrong answers, per item)
 public_reward      [N, Q] float32  optional public-proxy rewards
+output_lengths     [N, P+Q+T] int32  optional generated token counts
 sigma, seed        [N]             perturbation metadata (data-independent)
 =================  ==============  ===========================================
 
@@ -35,6 +36,7 @@ class ScoreTable:
     test_answer: np.ndarray
     reward_max: float = 1.0
     public_reward: Optional[np.ndarray] = None
+    output_lengths: Optional[np.ndarray] = None
     sigma: Optional[np.ndarray] = None
     seed: Optional[np.ndarray] = None
     base_index: int = 0
@@ -44,6 +46,8 @@ class ScoreTable:
     def __post_init__(self):
         self.pool_reward = np.asarray(self.pool_reward, dtype=np.float32)
         self.test_answer = np.asarray(self.test_answer, dtype=np.int16)
+        if self.output_lengths is not None:
+            self.output_lengths = np.asarray(self.output_lengths, dtype=np.int32)
         if self.pool_reward.shape[0] != self.test_answer.shape[0]:
             raise ValueError("pool_reward and test_answer must have the same number of candidates")
         if self.pool_reward.min() < 0 or self.pool_reward.max() > self.reward_max + 1e-6:
@@ -101,6 +105,8 @@ class ScoreTable:
             v = getattr(self, k)
             if v is not None:
                 arrays[k] = v
+        if self.output_lengths is not None:
+            arrays["output_lengths"] = self.output_lengths
         np.savez_compressed(path, **arrays)
 
     @classmethod
@@ -109,4 +115,5 @@ class ScoreTable:
         get = lambda k: z[k] if k in z.files else None
         return cls(pool_reward=z["pool_reward"], test_answer=z["test_answer"],
                    reward_max=float(z["reward_max"]), public_reward=get("public_reward"),
+                   output_lengths=get("output_lengths"),
                    sigma=get("sigma"), seed=get("seed"), base_index=int(z["base_index"]), name=name)

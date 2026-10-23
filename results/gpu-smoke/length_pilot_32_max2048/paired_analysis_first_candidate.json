@@ -1,0 +1,36 @@
+{
+  "completed": 1,
+  "planned": 32,
+  "max_tokens": 2048,
+  "complete": false,
+  "candidates": [
+    {
+      "index": 0,
+      "old_accuracy": 0.168,
+      "new_accuracy": 0.17,
+      "paired_difference": 0.0020000000000000018,
+      "old_cap_hit": 0.42129032258064514,
+      "new_cap_hit": 0.2896774193548387,
+      "length_finish": 0.2896774193548387
+    }
+  ],
+  "overall_cap_hit": 0.2896774193548387,
+  "overall_length_finish": 0.2896774193548387,
+  "scope": "Paired length diagnostic only; not a full-candidate-pool D1 comparison",
+  "base_paired_ci95": [
+    -0.034,
+    0.038
+  ],
+  "old_overall_cap_hit": 0.42129032258064514,
+  "new_length_finish_count": 449,
+  "responses": 1550,
+  "previous_pilot_comparison": {
+    "previous_cap": 1024,
+    "previous_stop_responses": 1104,
+    "unchanged_stop_texts": 261,
+    "unchanged_stop_text_fraction": 0.23641304347826086,
+    "note": "Text consistency diagnostic; does not certify token-level deterministic prefixes.",
+    "base_previous_accuracy": 0.19,
+    "base_new_accuracy": 0.17
+  }
+}

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Build a DP-RandOpt score table on GPUs (Phase 0, plan weeks 1-2).
 
-UNTESTED: written against RandOpt main @ 2026-10-05 (core/engine.py,
-utils/worker_extn.py, data_handlers/*) but not run here (no GPU in the
-authoring environment). Expect small fixes on first use.
+Executed on local and server Qwen Countdown runs. Requires the compatible
+RandOpt checkout and optional CPU-base-weight worker patch documented in the
+experimental artifacts; environments and model versions remain run-specific.
 
 Run from a RandOpt checkout with this repository on PYTHONPATH:
 
@@ -46,8 +46,16 @@ def parse():
     ap.add_argument("--gsm8k-test", default="data/gsm8k/test.parquet")
     ap.add_argument("--num-engines", type=int, default=3)
     ap.add_argument("--tp", type=int, default=1)
+    ap.add_argument("--precision", choices=["bfloat16", "float16"], default="bfloat16")
+    ap.add_argument("--gpu-memory-utilization", type=float, default=0.75,
+                    help="vLLM GPU memory fraction; lower this when sharing a GPU")
+    ap.add_argument("--base-weights-device", choices=["cuda", "cpu"], default="cuda",
+                    help="where RandOpt stores the pristine base-weight copy")
     ap.add_argument("--max-tokens", type=int, default=1024)
-    ap.add_argument("--seed", type=int, default=20261005)
+    ap.add_argument("--seed", type=int, default=20261005,
+                    help="candidate/noise and decoding seed")
+    ap.add_argument("--item-seed", type=int, default=None,
+                    help="dataset generation/split seed; defaults to --seed")
     ap.add_argument("--out", required=True)
     ap.add_argument("--checkpoint-every", type=int, default=50)
     return ap.parse_args()
@@ -55,14 +63,15 @@ def parse():
 
 def load_items(args, handler):
     """Return (pool, public, test) lists of RandOpt task dicts."""
+    item_seed = args.seed if args.item_seed is None else args.item_seed
     if args.dataset == "countdown":
         from dprandopt.countdown import generate_instances, to_messages
-        inst = generate_instances(args.pool + args.public + args.test, seed=args.seed)
+        inst = generate_instances(args.pool + args.public + args.test, seed=item_seed)
         items = [{"messages": to_messages(x), "ground_truth": {"numbers": x["numbers"], "target": x["target"]},
                   "numbers": x["numbers"], "target": x["target"]} for x in inst]
         return (items[:args.pool], items[args.pool:args.pool + args.public], items[args.pool + args.public:])
     train = handler.load_data(args.gsm8k_train, split="train")
-    rng = np.random.default_rng(args.seed)
+    rng = np.random.default_rng(item_seed)
     perm = rng.permutation(len(train))
     train = [train[i] for i in perm]
     test = handler.load_data(args.gsm8k_test, split="test")[: args.test]
@@ -83,6 +92,8 @@ def vote_string(args, handler, text, item):
 
 def main():
     args = parse()
+    out_dir = os.path.dirname(os.path.abspath(args.out))
+    os.makedirs(out_dir, exist_ok=True)
     import ray
     from transformers import AutoTokenizer
     from vllm import SamplingParams
@@ -93,6 +104,8 @@ def main():
     from dprandopt.scoretable import ScoreTable
 
     handler = get_dataset_handler(args.dataset)
+    if args.item_seed is None:
+        args.item_seed = args.seed
     pool, public, test = load_items(args, handler)
     items = pool + public + test
     tok = AutoTokenizer.from_pretrained(args.model)
@@ -108,16 +121,26 @@ def main():
 
     ckpt = args.out + ".partial.npz"
     rewards = np.zeros((N, P + Q), dtype=np.float32)
+    output_lengths = np.zeros((N, P + Q + T), dtype=np.int32)
     answers = [[""] * T for _ in range(N)]
     done = np.zeros(N, dtype=bool)
     if os.path.exists(ckpt):
         z = np.load(ckpt, allow_pickle=True)
         rewards, done = z["rewards"], z["done"]
         answers = [list(a) for a in z["answers"]]
+        if "output_lengths" in z.files:
+            output_lengths = z["output_lengths"]
+        if output_lengths.shape != (N, P + Q + T):
+            raise ValueError(f"checkpoint output_lengths shape {output_lengths.shape} != {(N, P + Q + T)}")
+        if rewards.shape != (N, P + Q) or done.shape != (N,):
+            raise ValueError("checkpoint arrays do not match the requested experiment shape")
 
+    os.environ["RANDOPT_BASE_WEIGHTS_DEVICE"] = args.base_weights_device
     if not ray.is_initialized():
         ray.init(address="auto" if os.environ.get("RAY_ADDRESS") else "local", ignore_reinit_error=True)
-    engines, pgs = launch_engines(args.num_engines, args.model, precision="bfloat16", tensor_parallel_size=args.tp)
+    engines, pgs = launch_engines(args.num_engines, args.model, precision=args.precision,
+                                   tensor_parallel_size=args.tp,
+                                   gpu_memory_utilization=args.gpu_memory_utilization)
     t0, tokens = time.time(), 0
     try:
         todo = [i for i in range(N) if not done[i]]
@@ -134,7 +157,9 @@ def main():
             for i, out in zip(batch, outs):
                 for j, o in enumerate(out):
                     text = o.outputs[0].text
-                    tokens += len(o.outputs[0].token_ids)
+                    n_tokens = len(o.outputs[0].token_ids)
+                    output_lengths[i, j] = n_tokens
+                    tokens += n_tokens
                     if j < P + Q:
                         rewards[i, j] = float(handler.compute_reward(text, items[j]["ground_truth"]))
                     else:
@@ -145,18 +170,20 @@ def main():
             el = time.time() - t0
             print(f"[{n_done}/{N}] {el / 3600:.2f} h, {tokens / el:.0f} generated tok/s", flush=True)
             if n_done % args.checkpoint_every < len(engines):
-                np.savez(ckpt, rewards=rewards, done=done, answers=np.array(answers, dtype=object))
+                np.savez(ckpt, rewards=rewards, done=done, answers=np.array(answers, dtype=object),
+                         output_lengths=output_lengths)
     finally:
         cleanup_engines(engines, pgs)
 
     reward_max = 1.1 if args.dataset == "countdown" else 1.0
     table = ScoreTable(pool_reward=rewards[:, :P], public_reward=rewards[:, P:], reward_max=reward_max,
                        test_answer=encode_answers(answers, [gold_string(args, it) for it in test]),
-                       sigma=sigmas, seed=seeds, base_index=0)
+                       sigma=sigmas, seed=seeds, output_lengths=output_lengths, base_index=0)
     table.save(args.out)
     with open(args.out + ".meta.json", "w") as f:
         json.dump({"model": args.model, "dataset": args.dataset, "N": N, "pool": P, "public": Q, "test": T,
-                   "sigmas": sig_grid, "seed": args.seed, "hours": (time.time() - t0) / 3600,
+                   "sigmas": sig_grid, "seed": args.seed, "candidate_seed": args.seed,
+                   "item_seed": args.item_seed, "hours": (time.time() - t0) / 3600,
                    "generated_tokens_per_s": tokens / (time.time() - t0)}, f, indent=2)
     print("wrote", args.out)
 
