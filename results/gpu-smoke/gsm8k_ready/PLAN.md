@@ -1,6 +1,12 @@
 # GSM8K execution plan
 
 Date: 2026-10-23. Mode: internal experiment design and execution preparation.
+
+Update 2026-10-25: the first full pool completed and was audited. D1=88.046%,
+random-5=88.739%, self-consistency=89.310%. Expansion to the remaining
+pools is deferred after this negative comparison. The execution plan below
+is retained as historical protocol, not a queued launch. See
+../gsm8k_pool_audit_20261025/REPORT.md.
 The full-test baselines completed on 2026-10-23 at 14:38 Asia/Shanghai.
 The first frozen candidate pool started at 16:08 on lzn GPU 0.
 

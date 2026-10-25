@@ -4,6 +4,14 @@ Date: 2026-10-23
 
 ## Current status
 
+Latest update 2026-10-25: the full GSM8K pool is complete and CPU-audited.
+At K=5, random vote is 88.739%, public 88.324% (88.767% with randomized
+score ties), nonprivate 87.642%, and D1 88.046%, versus self-consistency
+89.310%. This first pool does not support a private-selection advantage.
+One OOM restart recovered successfully; total wall time was about 40h16m.
+Further full pools have not started. See `gsm8k_pool_audit_20261025/REPORT.md`.
+Earlier running entries below are historical.
+
 Latest GSM8K update 2026-10-23 16:08 Asia/Shanghai: full-test baselines
 completed, greedy 85.75%, self-consistency vote 89.31%, oracle pass@5 94.84%.
 All five downloaded source-file SHA-256 hashes match the server.

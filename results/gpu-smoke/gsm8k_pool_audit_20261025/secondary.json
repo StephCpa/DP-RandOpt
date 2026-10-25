@@ -1,0 +1,27 @@
+{
+  "base_correctness_pairs": {
+    "table_only_correct": 33,
+    "standalone_only_correct": 35,
+    "both_correct": 1096,
+    "both_wrong": 155
+  },
+  "descriptive_K_curves": {
+    "public": {
+      "1": 0.8559514783927218,
+      "3": 0.8771796815769523,
+      "5": 0.8832448824867324,
+      "10": 0.8923426838514026,
+      "20": 0.8999241849886277,
+      "50": 0.9021986353297953
+    },
+    "nonprivate": {
+      "1": 0.8559514783927218,
+      "3": 0.8733889310083397,
+      "5": 0.8764215314632298,
+      "10": 0.8877937831690674,
+      "20": 0.8946171341925702,
+      "50": 0.9006823351023503
+    }
+  },
+  "scope": "K is descriptive only; primary K remains 5. Base calls differ in batch workload (1319 vs 2369 prompts), not a controlled repeatability test."
+}

@@ -1,0 +1,19 @@
+{
+  "model": "/home/lkx/OPCD/models/Qwen2.5-3B-Instruct",
+  "dataset": "gsm8k",
+  "N": 1001,
+  "pool": 1000,
+  "public": 50,
+  "test": 1319,
+  "sigmas": [
+    0.0005,
+    0.001,
+    0.002
+  ],
+  "seed": 20261024,
+  "candidate_seed": 20261024,
+  "item_seed": 20261023,
+  "scoring": "canonical_voting_answer_v1",
+  "hours": 8.601639190846019,
+  "generated_tokens_per_s": 4468.5687196505505
+}

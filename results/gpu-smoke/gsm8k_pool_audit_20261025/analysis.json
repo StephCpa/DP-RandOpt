@@ -1,0 +1,275 @@
+{
+  "N": 1001,
+  "base": 0.8559514783927218,
+  "K": 5,
+  "n": 1000,
+  "Q": 50,
+  "epsilon": 8,
+  "delta": 1e-05,
+  "random_scope": "Five distinct perturbations, excluding base; uniformly ordered.",
+  "random_draws": 2000,
+  "selection_draws": 400,
+  "random5": {
+    "member": 0.8428476118271417,
+    "vote": 0.8873938589840787,
+    "oracle_pass": 0.9434321776753781,
+    "vote_mc_standard_error": 0.00010999226054551522,
+    "oracle_pass_computation": "Exact finite-population expectation per test item"
+  },
+  "public": {
+    "member": 0.8553449583017437,
+    "vote": 0.8832448824867324,
+    "oracle_pass": 0.9378316906747536,
+    "vote_minus_random5": {
+      "difference": -0.0041489764973464795,
+      "conditional_item_ci95": [
+        -0.013364101592115244,
+        0.005114130022744488
+      ]
+    },
+    "pass_minus_vote": {
+      "difference": 0.05458680818802123,
+      "conditional_item_ci95": [
+        0.04245640636846096,
+        0.0667172100075815
+      ]
+    },
+    "members_in_vote_order": [
+      106,
+      668,
+      105,
+      107,
+      129
+    ],
+    "individual_member_accuracy": [
+      0.8559514783927218,
+      0.8514025777103866,
+      0.8498862774829417,
+      0.8635329795299469,
+      0.8559514783927218
+    ]
+  },
+  "nonprivate": {
+    "member": 0.8539802880970433,
+    "vote": 0.8764215314632298,
+    "oracle_pass": 0.9347990902198635,
+    "vote_minus_random5": {
+      "difference": -0.010972327520849133,
+      "conditional_item_ci95": [
+        -0.020081273692191058,
+        -0.0020592115238817366
+      ]
+    },
+    "pass_minus_vote": {
+      "difference": 0.058377558756633814,
+      "conditional_item_ci95": [
+        0.04622820318423049,
+        0.0712661106899166
+      ]
+    },
+    "members_in_vote_order": [
+      129,
+      971,
+      181,
+      688,
+      939
+    ],
+    "individual_member_accuracy": [
+      0.8559514783927218,
+      0.8521607278241091,
+      0.8589840788476119,
+      0.8423047763457164,
+      0.8605003790750568
+    ]
+  },
+  "D1": {
+    "member": 0.8540246398786965,
+    "vote": 0.8804624715693706,
+    "oracle_pass": 0.9360481425322215,
+    "vote_minus_random5": {
+      "difference": -0.006931387414708117,
+      "conditional_item_ci95": [
+        -0.012795043593631539,
+        -0.0011805724033358844
+      ]
+    },
+    "pass_minus_vote": {
+      "difference": 0.05558567096285064,
+      "conditional_item_ci95": [
+        0.04662409969673995,
+        0.06464191622441243
+      ]
+    }
+  },
+  "public_private_overlap": {
+    "indices": [
+      129
+    ],
+    "count": 1
+  },
+  "nonprivate_minus_public": {
+    "member": {
+      "difference": -0.0013646702047005318,
+      "conditional_item_ci95": [
+        -0.0075815011372251705,
+        0.005155420773313115
+      ]
+    },
+    "vote": {
+      "difference": -0.006823351023502654,
+      "conditional_item_ci95": [
+        -0.017437452615617893,
+        0.003032600454890068
+      ]
+    },
+    "oracle_pass": {
+      "difference": -0.003032600454890068,
+      "conditional_item_ci95": [
+        -0.011372251705837756,
+        0.00530705079605762
+      ]
+    }
+  },
+  "comparisons": {
+    "D1_minus_random5": {
+      "difference": -0.006931387414708117,
+      "conditional_item_ci95": [
+        -0.012795043593631539,
+        -0.0011805724033358844
+      ]
+    },
+    "D1_minus_self_consistency": {
+      "difference": -0.012638362395754358,
+      "conditional_item_ci95": [
+        -0.025778999241849884,
+        9.619029567852523e-06
+      ]
+    },
+    "D1_minus_public": {
+      "difference": -0.0027824109173616362,
+      "conditional_item_ci95": [
+        -0.012269190674753603,
+        0.006194323351023499
+      ]
+    },
+    "D1_minus_nonprivate": {
+      "difference": 0.004040940106141018,
+      "conditional_item_ci95": [
+        -0.0013741470811220607,
+        0.009571692570128887
+      ]
+    },
+    "public_minus_self_consistency": {
+      "difference": -0.009855951478392721,
+      "conditional_item_ci95": [
+        -0.024260803639120546,
+        0.004548900682335102
+      ]
+    },
+    "random5_minus_self_consistency": {
+      "difference": -0.005706974981046242,
+      "conditional_item_ci95": [
+        -0.015608273313115994,
+        0.004403866565579965
+      ]
+    },
+    "nonprivate_minus_self_consistency": {
+      "difference": -0.016679302501895376,
+      "conditional_item_ci95": [
+        -0.0310841546626232,
+        -0.002274450341167551
+      ]
+    }
+  },
+  "standalone_baselines": {
+    "greedy": {
+      "member": 0.8574677786201668,
+      "vote": 0.8574677786201668,
+      "oracle_pass": 0.8574677786201668
+    },
+    "self_consistency": {
+      "member": 0.8423047763457164,
+      "vote": 0.8931008339651251,
+      "oracle_pass": 0.9484457922668689
+    }
+  },
+  "base_batch_correctness_flip_rate": 0.05155420773313116,
+  "length_cap_rate": {
+    "base": 0.0008442380751371887,
+    "perturbations": 0.001752216124947235
+  },
+  "private_sizes": [
+    {
+      "n": 200,
+      "vote": 0.8859761182714179,
+      "versus_public": {
+        "difference": 0.00273123578468537,
+        "conditional_item_ci95": [
+          -0.00605823540561031,
+          0.011495735405610307
+        ]
+      },
+      "versus_sc": {
+        "difference": -0.007124715693707352,
+        "conditional_item_ci95": [
+          -0.01771678354814253,
+          0.003646796815769523
+        ]
+      }
+    },
+    {
+      "n": 500,
+      "vote": 0.8843840030326005,
+      "versus_public": {
+        "difference": 0.0011391205458680825,
+        "conditional_item_ci95": [
+          -0.007733415466262317,
+          0.009956643290371492
+        ]
+      },
+      "versus_sc": {
+        "difference": -0.008716830932524637,
+        "conditional_item_ci95": [
+          -0.0197165940106141,
+          0.002370308946171328
+        ]
+      }
+    },
+    {
+      "n": 1000,
+      "vote": 0.8803146322971949,
+      "versus_public": {
+        "difference": -0.0029302501895375273,
+        "conditional_item_ci95": [
+          -0.012402388172858225,
+          0.006072924564063684
+        ]
+      },
+      "versus_sc": {
+        "difference": -0.012786201667930252,
+        "conditional_item_ci95": [
+          -0.025858747156937076,
+          -5.9609552691446827e-05
+        ]
+      }
+    }
+  ],
+  "public_ties": {
+    "cutoff_score": 49.0,
+    "cutoff_tie_count": 45,
+    "randomized_vote": 0.8876667930250189,
+    "D1_minus_randomized": {
+      "difference": -0.007204321455648219,
+      "conditional_item_ci95": [
+        -0.014314300606520093,
+        -0.0002989480667172193
+      ]
+    }
+  },
+  "scope": "One frozen pool, one self-consistency sample seed; 5000 paired test-item bootstrap draws, conditional on these and selection data. Exploratory unadjusted intervals; not across-pool uncertainty. GSM8K pass is oracle-only. Secondary n varies both the private subsample and DP randomness.",
+  "source_sha256": {
+    "gsm8k_n1001_seed20261024_items20261023_max1024.npz": "d53c133154bf0abe7aaf8b3ef87b40d7431c259f25608d0d6e1a25f88acfd246",
+    "gsm8k_n1001_seed20261024_items20261023_max1024.npz.meta.json": "d7950892a83612d137b4449f0139a297c0836f39e7edda09016d8b532f62a581",
+    "COMPLETE.json": "0eef120968eb16f8335b0da5bb1f69615f463affc800b252cbd1d19bd61ce771"
+  }
+}
