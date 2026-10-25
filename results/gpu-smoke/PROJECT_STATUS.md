@@ -4,6 +4,14 @@ Date: 2026-10-23
 
 ## Current status
 
+Synthesis update 2026-10-25: [research conclusions and stopping decision](../../docs/RESEARCH_CONCLUSIONS_20261025.md)
+now reconcile eight distinct settings. Full 512-token Countdown retains a
+positive private-selection result; the long-cap subsets and full GSM8K pool
+do not establish superiority over all data-free/public baselines. Expansion
+of the current 3B GSM8K claim is stopped; other candidate pools, D4 inference
+and 7B work are not scheduled. The source ledger is in
+`cross_task_synthesis_20261025/evidence.json`. No GPU work was added.
+
 Latest diagnostic update 2026-10-25: CPU sigma/diversity/spread checks show
 selection heavily favors sigma=0.0005 and reduces disagreement. Group vote
 is best at sigma=0.001, not 0.002. Overall spread is substantial due to

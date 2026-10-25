@@ -2,21 +2,19 @@
 
 Differentially private post-training by **selection**. RandOpt ("Neural Thickets", Gan & Isola, ICML 2026) draws random weight perturbations without data, scores them on a small labelled set, and majority-votes the top K. DP-RandOpt makes only that selection step private, so the privacy cost depends on how many models are picked, not on model size or training steps.
 
-**Start here: [`docs/REPORT.md`](docs/REPORT.md).** It covers what the October 4 research plan survives, what to change before spending GPU time, and the evidence for each point. Proofs are in [`docs/theory.md`](docs/theory.md).
+**Start here: [research conclusions and stopping decision (2026-10-25)](docs/RESEARCH_CONCLUSIONS_20261025.md).**
+The full 3B GSM8K pool does not beat data-free voting or self-consistency.
+The full 512-token Countdown pool retains a positive private-selection result;
+longer-cap subset controls are a distinct setting. The report reconciles these
+findings, explains the limits, and records the decision not to expand GPU runs.
+The [eight-setting ledger](results/gpu-smoke/cross_task_synthesis_20261025/evidence.json)
+and [artifact guide](results/gpu-smoke/ARTIFACTS.md) provide reproduction entry points.
 
-**Real-model update (2026-10-23):** see the [current Countdown analysis](results/gpu-smoke/selection_decomposition/REPORT.md)
-and [project status](results/gpu-smoke/PROJECT_STATUS.md). Full 512-token and
-32-candidate 1024/2048-token tables have run on GPUs. Current evaluation fixes
-1024 tokens, compares selection against data-free random-5 voting and checked
-pass@5, and separates member quality from ensemble composition. Production
-batched repeatability and base sampling controls are complete; see the
-[paired comparison](results/gpu-smoke/batched_controls_20261023/REPORT.md). These
-Countdown results are task-specific and do not yet validate the claim on GSM8K.
-
-The small frozen score-table artifacts included here use **generated synthetic
-Countdown items**, not confidential examples. Large response-text archives
-remain in the experiment workspace. CPU table-only reproduction is documented
-in [the artifact guide](results/gpu-smoke/ARTIFACTS.md).
+The earlier [simulation and plan audit](docs/REPORT.md) is historical context.
+The existing mathematical statements and derivations are in [theory.md](docs/theory.md).
+The published score tables use synthetic Countdown items and public GSM8K
+benchmark data, not confidential records. The word "private" identifies the
+selection split and mechanism experiment. Larger response archives remain local.
 
 ## Status (2026-10-05)
 
@@ -26,7 +24,7 @@ in [the artifact guide](results/gpu-smoke/ARTIFACTS.md).
 | Accounting cross-check | Agrees with AutoDP's exponential-mechanism composition within 0.1% (`results/e7_accounting_crosscheck.md`) |
 | Theory (privacy, peeling-corrected utility, N-free population bound, packing lower bound) | `docs/theory.md` |
 | Simulation study (7 experiments on calibrated synthetic score tables) | `results/`, `docs/figures/` |
-| GPU score-table builder for RandOpt + vLLM | Initially untested; now executed on local/server Countdown runs (see the 2026-10-23 update above) |
+| GPU score-table builder for RandOpt + vLLM | Initially untested; now executed on local/server Countdown runs (see the current report above) |
 | Phase 0/1 analysis of a real score table | `scripts/analyze_score_table.py` (CPU, minutes) |
 
 ## Layout
