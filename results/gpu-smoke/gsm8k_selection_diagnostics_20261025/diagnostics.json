@@ -1,0 +1,311 @@
+{
+  "scope": "One fixed pool and fixed test items; descriptive post-hoc diagnostics, not protocol tuning or causal identification.",
+  "source_sha256": "d53c133154bf0abe7aaf8b3ef87b40d7431c259f25608d0d6e1a25f88acfd246",
+  "groups": {
+    "0.0005": {
+      "count": 332,
+      "member_accuracy": 0.8563990609899798,
+      "pool_accuracy": 0.928647518157959,
+      "public_accuracy": 0.9376506209373474,
+      "correctness_flip_vs_base": 0.07944134384391242,
+      "flip_quantiles": [
+        0.0712661106899166,
+        0.07884761182714177,
+        0.0887035633055345
+      ],
+      "fraction_observed_above_base": 0.5120481927710844,
+      "random5": {
+        "member": 0.8563841546626233,
+        "vote": 0.8817668688400304,
+        "oracle_pass": 0.9353457164518575,
+        "disagreement": 0.13205155420773315,
+        "disagreement_both_valid": 0.131370655823371,
+        "correctness_disagreement": 0.08876171341925701,
+        "joint_error": 0.0992349886277483
+      }
+    },
+    "0.001": {
+      "count": 333,
+      "member_accuracy": 0.8509631693862172,
+      "pool_accuracy": 0.9255616068840027,
+      "public_accuracy": 0.9348348379135132,
+      "correctness_flip_vs_base": 0.0982840308086707,
+      "flip_quantiles": [
+        0.08718726307808947,
+        0.09855951478392722,
+        0.10871872630780893
+      ],
+      "fraction_observed_above_base": 0.23723723723723725,
+      "random5": {
+        "member": 0.8509159211523882,
+        "vote": 0.8885451099317664,
+        "oracle_pass": 0.9425833965125094,
+        "disagreement": 0.15647084912812737,
+        "disagreement_both_valid": 0.1556936433932246,
+        "correctness_disagreement": 0.10730439727065959,
+        "joint_error": 0.09543188021228204
+      }
+    },
+    "0.002": {
+      "count": 335,
+      "member_accuracy": 0.8213504124562933,
+      "pool_accuracy": 0.9015851020812988,
+      "public_accuracy": 0.904716432094574,
+      "correctness_flip_vs_base": 0.13197922442374935,
+      "flip_quantiles": [
+        0.11501137225170584,
+        0.1288855193328279,
+        0.14806671721000758
+      ],
+      "fraction_observed_above_base": 0.0,
+      "random5": {
+        "member": 0.8212781652767248,
+        "vote": 0.884578847611827,
+        "oracle_pass": 0.945204700530705,
+        "disagreement": 0.217191546626232,
+        "disagreement_both_valid": 0.2149859118189218,
+        "correctness_disagreement": 0.15102714177407128,
+        "joint_error": 0.10320826383623959
+      }
+    }
+  },
+  "ensembles": {
+    "random5": {
+      "draws": 2000,
+      "member": 0.8428154662623198,
+      "vote": 0.8873938589840789,
+      "oracle_pass": 0.9434480667172099,
+      "disagreement": 0.17340970432145564,
+      "disagreement_both_valid": 0.172167013306851,
+      "correctness_disagreement": 0.1202325246398787,
+      "joint_error": 0.09706827141774071,
+      "sigma_fraction": {
+        "0.0": 0.0,
+        "0.0005": 0.3229,
+        "0.001": 0.3384,
+        "0.002": 0.3387
+      },
+      "diversity_vote_association": {
+        "raw": {
+          "pearson": 0.00765457766097755,
+          "spearman": 0.05653887609479373
+        },
+        "controlling_mean_member_accuracy": {
+          "pearson": 0.6795271737844055,
+          "spearman": 0.6650532082420101
+        }
+      }
+    },
+    "public": {
+      "draws": 1,
+      "member": 0.8553449583017437,
+      "vote": 0.8832448824867324,
+      "oracle_pass": 0.9378316906747536,
+      "disagreement": 0.1385898407884761,
+      "disagreement_both_valid": 0.138328530259366,
+      "correctness_disagreement": 0.09507202426080363,
+      "joint_error": 0.09711902956785444,
+      "sigma_fraction": {
+        "0.0": 0.0,
+        "0.0005": 0.8,
+        "0.001": 0.2,
+        "0.002": 0.0
+      }
+    },
+    "nonprivate": {
+      "draws": 1,
+      "member": 0.8539802880970432,
+      "vote": 0.8764215314632298,
+      "oracle_pass": 0.9347990902198635,
+      "disagreement": 0.13161485974222897,
+      "disagreement_both_valid": 0.1313514333383892,
+      "correctness_disagreement": 0.08946171341925702,
+      "joint_error": 0.10128885519332828,
+      "sigma_fraction": {
+        "0.0": 0.0,
+        "0.0005": 1.0,
+        "0.001": 0.0,
+        "0.002": 0.0
+      }
+    },
+    "D1": {
+      "draws": 400,
+      "member": 0.8540246398786959,
+      "vote": 0.8804624715693709,
+      "oracle_pass": 0.9360481425322215,
+      "disagreement": 0.13633567096285065,
+      "disagreement_both_valid": 0.13580400391289368,
+      "correctness_disagreement": 0.09197649734647462,
+      "joint_error": 0.09998711144806671,
+      "sigma_fraction": {
+        "0.0": 0.0005,
+        "0.0005": 0.818,
+        "0.001": 0.1815,
+        "0.002": 0.0
+      },
+      "diversity_vote_association": {
+        "raw": {
+          "pearson": 0.11274850502140066,
+          "spearman": 0.10580514892044394
+        },
+        "controlling_mean_member_accuracy": {
+          "pearson": 0.6047645609732808,
+          "spearman": 0.6005839345575926
+        }
+      }
+    },
+    "self_consistency": {
+      "member": 0.8423047763457164,
+      "vote": 0.8931008339651251,
+      "oracle_pass": 0.9484457922668689,
+      "disagreement": 0.18241091736163761,
+      "disagreement_both_valid": 0.18141794443601034,
+      "correctness_disagreement": 0.1243366186504928,
+      "joint_error": 0.09552691432903715
+    },
+    "sigma_0.0005": {
+      "diversity_vote_association": {
+        "raw": {
+          "pearson": -0.08051113725415059,
+          "spearman": -0.07104796002332373
+        },
+        "controlling_mean_member_accuracy": {
+          "pearson": 0.3900439422689183,
+          "spearman": 0.3793520447781392
+        }
+      }
+    },
+    "sigma_0.001": {
+      "diversity_vote_association": {
+        "raw": {
+          "pearson": -0.19859853705724728,
+          "spearman": -0.19413917590647706
+        },
+        "controlling_mean_member_accuracy": {
+          "pearson": 0.4701863572948505,
+          "spearman": 0.46139362823134633
+        }
+      }
+    },
+    "sigma_0.002": {
+      "diversity_vote_association": {
+        "raw": {
+          "pearson": -0.25256806191083064,
+          "spearman": -0.21449870543448787
+        },
+        "controlling_mean_member_accuracy": {
+          "pearson": 0.652348172048834,
+          "spearman": 0.6407446745671825
+        }
+      }
+    }
+  },
+  "spread": {
+    "0.0005": {
+      "candidates": 332,
+      "observed_variance": 3.343913340457524e-05,
+      "observed_sd": 0.005782657987861225,
+      "marginal_binomial_variance": 9.328252724760057e-05,
+      "marginal_binomial_se": 0.009658288008109955,
+      "naive_subtracted_variance": -5.984339384302533e-05,
+      "shared_item_sampling_variance": 3.360505601730216e-05,
+      "shared_item_noise_sd": 0.005796986804996382,
+      "estimated_latent_variance": -1.6592261272692181e-07,
+      "estimated_latent_sd": 0.0
+    },
+    "0.001": {
+      "candidates": 333,
+      "observed_variance": 5.402199778185364e-05,
+      "observed_sd": 0.0073499658354208445,
+      "marginal_binomial_variance": 9.61843656789235e-05,
+      "marginal_binomial_se": 0.009807362829982558,
+      "naive_subtracted_variance": -4.2162367897069865e-05,
+      "shared_item_sampling_variance": 4.0564772606194895e-05,
+      "shared_item_noise_sd": 0.006369048014122275,
+      "estimated_latent_variance": 1.3457225175658742e-05,
+      "estimated_latent_sd": 0.003668409079650025
+    },
+    "0.002": {
+      "candidates": 335,
+      "observed_variance": 0.0009648880147860424,
+      "observed_sd": 0.031062646615928308,
+      "marginal_binomial_variance": 0.00011060083813514028,
+      "marginal_binomial_se": 0.01051669330802892,
+      "naive_subtracted_variance": 0.0008542871766509021,
+      "shared_item_sampling_variance": 5.6608693616149506e-05,
+      "shared_item_noise_sd": 0.00752387490699769,
+      "estimated_latent_variance": 0.0009082793211698929,
+      "estimated_latent_sd": 0.030137672789548514
+    },
+    "all_perturbations": {
+      "candidates": 1000,
+      "observed_variance": 0.0005895804498853999,
+      "observed_sd": 0.024281277764677044,
+      "marginal_binomial_variance": 0.0001000504735925569,
+      "marginal_binomial_se": 0.010002523361260243,
+      "naive_subtracted_variance": 0.0004895299762928431,
+      "shared_item_sampling_variance": 4.518154562519447e-05,
+      "shared_item_noise_sd": 0.006721721924119925,
+      "estimated_latent_variance": 0.0005443989042602054,
+      "estimated_latent_sd": 0.023332357451835112
+    }
+  },
+  "correlations": {
+    "0.0005": {
+      "pearson": -0.028613181927696532,
+      "spearman": -0.02396520577252209
+    },
+    "0.001": {
+      "pearson": 0.1118213462023867,
+      "spearman": 0.07487561060729583
+    },
+    "0.002": {
+      "pearson": 0.940480405688935,
+      "spearman": 0.3055480049440844
+    },
+    "all_perturbations": {
+      "pearson": 0.9139086777300902,
+      "spearman": 0.697320454567931
+    },
+    "within_sigma_centered": {
+      "pearson": 0.8817906588693006,
+      "spearman": 0.20483576810346665
+    }
+  },
+  "candidate_accuracy": {
+    "base": 0.8559514783927218,
+    "quantiles": [
+      0.37680060652009095,
+      0.8134571645185747,
+      0.8301743745261562,
+      0.849128127369219,
+      0.8559514783927218,
+      0.863570887035633,
+      0.8703563305534496
+    ],
+    "fraction_above_base": 0.249,
+    "fraction_at_least_5pp_above_base": 0.0
+  },
+  "base_splits": {
+    "pool": {
+      "correct": 933,
+      "n": 1000,
+      "accuracy": 0.933
+    },
+    "public": {
+      "correct": 46,
+      "n": 50,
+      "accuracy": 0.92
+    },
+    "test": {
+      "correct": 1129,
+      "n": 1319,
+      "accuracy": 0.8559514783927218
+    }
+  },
+  "spread_assumptions": "Latent spread correction assumes iid test-item sampling; candidates share items. Marginal binomial subtraction ignores shared-item covariance and is reported only as a naive reference. No decoder rerun component is identifiable. A clipped SD is a descriptive estimate, not proof of zero spread.",
+  "D4": {
+    "feasible": false,
+    "reason": "Final table stores pool/public rewards only. Partial answers have shape (1001,1319), i.e. test only. No full-pool response bundles found on server. Wrong-answer identities cannot be recovered from binary correctness. Exact private vote utilities and pool-test ensemble reliability are unavailable; do not substitute oracle pass or fabricate wrong answers."
+  }
+}

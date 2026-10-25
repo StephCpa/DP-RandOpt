@@ -4,6 +4,14 @@ Date: 2026-10-23
 
 ## Current status
 
+Latest diagnostic update 2026-10-25: CPU sigma/diversity/spread checks show
+selection heavily favors sigma=0.0005 and reduces disagreement. Group vote
+is best at sigma=0.001, not 0.002. Overall spread is substantial due to
+lower-tail damage; upper-end small-sigma ranking signal is weak. Base pool
+accuracy is 93.3% versus test 85.595%, a split gap, not proof of contamination.
+D4 cannot be scored because private-pool answers were not retained. No new
+GPU job was launched. See `gsm8k_selection_diagnostics_20261025/REPORT.md`.
+
 Latest update 2026-10-25: the full GSM8K pool is complete and CPU-audited.
 At K=5, random vote is 88.739%, public 88.324% (88.767% with randomized
 score ties), nonprivate 87.642%, and D1 88.046%, versus self-consistency
